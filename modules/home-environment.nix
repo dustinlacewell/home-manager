@@ -372,9 +372,11 @@ in
         ''
     );
 
-    home.activation.installPackages = dagEntryAfter ["writeBoundary"] ''
-      $DRY_RUN_CMD nix-env -i ${cfg.path}
-    '';
+    home.activation.installPackages = dagEntryAfter ["writeBoundary"] (
+      optionalString (!config.nixosSubmodule) ''
+        $DRY_RUN_CMD nix-env -i ${cfg.path}
+      ''
+    );
 
     home.activationPackage =
       let
