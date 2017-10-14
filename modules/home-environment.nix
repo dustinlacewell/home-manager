@@ -399,7 +399,11 @@ in
           # This code explicitly requires GNU Core Utilities and Bash.
           # We therefore need to ensure they are prioritized over any
           # other similarly named tools on the system.
-          export PATH="${pkgs.coreutils}/bin:${pkgs.bash}/bin:$PATH"
+          #
+          # Also add
+          #  - ncurses for the `tput` tool,
+          #  - gnused for the `sed` tool.
+          export PATH="${pkgs.coreutils}/bin:${pkgs.bash}/bin:${pkgs.ncurses}/bin:${pkgs.gnused}/bin:${pkgs.nix}/bin''${PATH:+:}$PATH"
 
           . ${./lib-bash/color-echo.sh}
 
